@@ -3,6 +3,7 @@ document.getElementById('search').onclick = function(event){
   event.preventDefault();
   if (query.trim()){
     document.getElementById('content').innerHTML = "";
+    document.getElementById('content').style.opacity = '0';
     search(query);
     return;
   }
@@ -50,6 +51,7 @@ function search(query,pageToken) {
             </div>`;      
             document.getElementById('content').innerHTML += card;
           }
+          document.getElementById('content').style.opacity = '1';
           StartScroll(query, response.result.nextPageToken);
         }, function(reason) {
           console.log('Error: ' + reason.result.error.message);
@@ -67,7 +69,7 @@ function StartScroll(query, nextPageToken){
     startX = event.pageX - container.offsetLeft;
     scrollLeft = container.scrollLeft;
   });
-  
+
   container.addEventListener('mouseleave', () => {
     isDown = false;
     let card = document.getElementsByClassName('card')[0];

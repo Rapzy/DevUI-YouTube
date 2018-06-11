@@ -8,6 +8,37 @@ a,a:hover,a:visited,a:linked{
 header{
 	text-align: center;
 }
+h2{
+	word-wrap: break-word;
+}
+header input{
+	font-size:20px;
+}
+#query{
+	border: none;
+  outline: none;
+  border-bottom: 2px solid grey;
+  width: 100%;
+  padding:5px;
+  max-width: 600px;
+  color:grey;
+}
+#query:focus{
+	border-bottom: 2px red solid;
+	color:red;
+}
+#search{
+	background: transparent;
+  border: none;
+  outline: none;
+  padding: 5px;
+  border-bottom: 2px grey solid;
+  color: grey;
+}
+#search:hover{
+	border-bottom: 2px red solid;
+	color:red;
+}
 .card{
 	float:left;
 	width: 100%;
@@ -26,6 +57,8 @@ header{
 	overflow-x: scroll;
 	width: 1400px;
 	margin:0 auto;
+	opacity: 0;
+	transition: all ease 1s;
 }
 .clearfix:after {
   content: "";
