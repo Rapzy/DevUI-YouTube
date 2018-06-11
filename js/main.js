@@ -2,6 +2,7 @@ document.getElementById('search').onclick = function(event){
   var query = document.getElementById("query").value;
   event.preventDefault();
   if (query.trim()){
+    document.getElementById('content').innerHTML = "";
     search(query);
     return;
   }
@@ -66,7 +67,28 @@ function StartScroll(query, nextPageToken){
     startX = event.pageX - container.offsetLeft;
     scrollLeft = container.scrollLeft;
   });
-  container.addEventListener('mouseleave', () => isDown = false);
+  
+  container.addEventListener('mouseleave', () => {
+    isDown = false;
+    let card = document.getElementsByClassName('card')[0];
+    var width = card.offsetWidth + parseInt(getComputedStyle(card).marginRight) * 2;
+    if (container.scrollLeft < width/2) {
+      container.scrollLeft = 0;
+    }
+    else {
+      if (container.scrollLeft > width/2 && container.scrollLeft < width){
+        container.scrollLeft = width;
+      }
+      else{
+        if(container.scrollLeft%width < width/2){
+          container.scrollLeft -= container.scrollLeft%width;
+        }
+        else{
+          container.scrollLeft += width-container.scrollLeft%width;
+        }
+      }
+    }
+  });
 
   container.addEventListener('mouseup', () => {
     isDown = false;

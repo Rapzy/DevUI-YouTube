@@ -24,7 +24,7 @@ header{
 	padding:50px 0;
 	display: flex;
 	overflow-x: scroll;
-	width: calc(350px * 4);
+	width: 1400px;
 	margin:0 auto;
 }
 .clearfix:after {
@@ -40,4 +40,19 @@ header{
 }
 .description{
 	font-size: 14px;
+}
+@media all and (max-width: 1400px){
+	#content{
+		width: 1050px;
+	}
+}
+@media all and (max-width: 1050px){
+	#content{
+		width: 700px;
+	}
+}
+@media all and (max-width: 700px){
+	#content{
+		width: 350px;
+	}
 }
