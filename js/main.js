@@ -23,13 +23,34 @@ container.addEventListener('mousedown', (event) => {
 
 container.addEventListener('mouseleave', () => isDown = false);
 
-container.addEventListener('mouseup', () => isDown = false);
+container.addEventListener('mouseup', () => {
+  isDown = false;
+  let card = document.getElementsByClassName('card')[0];
+  var width = card.offsetWidth + parseInt(getComputedStyle(card).marginRight) * 2;
+  if (container.scrollLeft < width/2) {
+    container.scrollLeft = 0;
+  }
+  else {
+    if (container.scrollLeft > width/2 && container.scrollLeft < width){
+      container.scrollLeft = width;
+    }
+    else{
+      if(container.scrollLeft%width < width/2){
+        container.scrollLeft -= container.scrollLeft%width;
+      }
+      else{
+        container.scrollLeft += width-container.scrollLeft%width;
+      }
+    }
+  }
+});
 
 container.addEventListener('mousemove', (event) => {
   if(!isDown) return;
   event.preventDefault();
   const x = event.pageX - container.offsetLeft;
-  container.scrollLeft = scrollLeft - (x - startX) * 2;
+  let delta = x - startX;
+  container.scrollLeft = scrollLeft - delta * 2;
 });
 
 function start() {
