@@ -1,6 +1,12 @@
+html{
+	font-family: 'Roboto', sans-serif;
+}
 a,a:hover,a:visited,a:linked{
 	text-decoration: none;
 	display: block;
+}
+header{
+	text-align: center;
 }
 .card{
 	float:left;
@@ -28,4 +34,10 @@ a,a:hover,a:visited,a:linked{
 }
 .card-bottom{
 	padding: 0 10px;
+}
+.author{
+	color: grey;
+}
+.description{
+	font-size: 14px;
 }
