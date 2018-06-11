@@ -1,24 +1,48 @@
 document.getElementById('search').onclick = function(event){
-      var query = document.getElementById("query").value;
-      event.preventDefault();
-      if (query.trim()){
-        search(query);
-        return;
-      }
-      else {
-        alert('Введите запрос для поиска!')
-        return;
-      }
-    }
+  var query = document.getElementById("query").value;
+  event.preventDefault();
+  if (query.trim()){
+    search(query);
+    return;
+  }
+  else {
+    alert('Введите запрос для поиска!')
+    return;
+  }
+}
+const container = document.getElementById('content');
+let isDown = false;
+let startX;
+let scrollLeft;
+
+container.addEventListener('mousedown', (event) => {
+  isDown = true;
+  startX = event.pageX - container.offsetLeft;
+  scrollLeft = container.scrollLeft;
+});
+
+container.addEventListener('mouseleave', () => isDown = false);
+
+container.addEventListener('mouseup', () => isDown = false);
+
+container.addEventListener('mousemove', (event) => {
+  if(!isDown) return;
+  event.preventDefault();
+  const x = event.pageX - container.offsetLeft;
+  container.scrollLeft = scrollLeft - (x - startX) * 2;
+});
+
 function start() {
     gapi.client.init({
       'apiKey': 'AIzaSyDnYv2YoUO7jp87pyYjGcyhcQVv-dfBv40',
       'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest']
     });
 };
+
 function loadClient() {
   gapi.load('client', start);
 }
+
 function search(query) {
       return gapi.client.request({
       'method': 'GET',
@@ -30,8 +54,7 @@ function search(query) {
                 }
     }).then(function(response) {
           console.log(response.result);
-          var container = document.getElementById('content');
-          var block, title, img, video, url, a, card;
+          let block, title, img, video, url, a, card;
           video = response.result.items;
           for (var i = 0; i < video.length; i++) {
             card = `
